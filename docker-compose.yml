@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  cj22-lucky-leucrota:
+    image: cj22LuckyLeucrota
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8000:8000
