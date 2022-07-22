@@ -1,20 +1,24 @@
-from fastapi import FastAPI  # , Request
+from fastapi import FastAPI  # , Request, Depends
 
-# from fastapi.staticfiles import StaticFiles
-# from fastapi.responses import HTMLResponse
-# from fastapi.templating import Jinja2Templates
+from .routers import main
+
+# from .dependencies import get_query_token, get_token_header
+# from .internal import admin
+
 
 app = FastAPI(title="App", description="The app", version="0.1.0")
-# templates = Jinja2Templates(directory="templates")
-# app.mount("/static", StaticFiles(directory="static"), name="static")
+
+app.include_router(main.router)
+# app.include_router(
+#     admin.router,
+#     prefix="/admin",
+#     tags=["admin"],
+#     dependencies=[Depends(get_token_header)],
+#     responses={418: {"description": "I'm a teapot"}},
+# )
 
 
 @app.get("/")
-def index():
-    """The Index Route."""
-    return {"hello": "world"}
-
-
-# @app.get("/index/", response_class=HTMLResponse)
-# async def display_posts_by_id(request: Request):
-#     return templates.TemplateResponse("template.html", {"request": request})
+async def root():
+    """The root"""
+    return {"message": "Hello Bigger Applications!"}
