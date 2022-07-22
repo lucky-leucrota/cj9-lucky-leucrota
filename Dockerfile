@@ -11,7 +11,7 @@ ENV PYTHONUNBUFFERED=1
 
 #Virtualenv
 WORKDIR /app
-RUN python -m vitualenv /opt/venv
+RUN python -m venv /opt/venv
 # Enable venv
 ENV PATH="/opt/venv/bin:$PATH"
 

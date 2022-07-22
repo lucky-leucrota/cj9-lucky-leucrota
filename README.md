@@ -22,10 +22,10 @@ uvicorn app.main:main --host '0.0.0.0' --port '80'
 just fork and clone this and open this folder.
 then run this to build,
 ```bash
-$ docker build -t projectImage .
+$ docker build -t projectimage .
 ```
 
 After it's built use this to run it.
 ```bash
-$ docker run -d --name projectContainer -p 80:80 projectImage
+$ docker run -d --name projectcontainer -p 80:80 projectimage
 ```

@@ -6,3 +6,4 @@ isort
 Jinja2
 pre-commit
 pytest
+trio
