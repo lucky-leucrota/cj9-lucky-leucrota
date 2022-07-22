@@ -14,7 +14,7 @@ Just fork and clone this and open the folder then run the below to build,
 
 To run the project run this,
 ```bash
-uvicorn app.main:main --host '0.0.0.0' --port '80'
+uvicorn src.main:main --host '0.0.0.0' --port '80'
 ```
 
 ### With Docker
