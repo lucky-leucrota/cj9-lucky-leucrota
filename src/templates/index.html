@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+    {% block title %}Home{% endblock %}
+    {% block custom_files %}
+    <link rel="stylesheet" href={{ url_for("static", path="/style.css") }} />
+    <script src={{ url_for("static", path="/script.js") }}></script>
+    {% endblock %}
+    {% block body %}
+        <div>
+            <h3 style="margin-left: 30px; margin-top: 30px">Your Messages ...</h3>
+            <textarea
+                style="float: left"
+                placeholder="your message..."
+                id="texta"
+                rows="33"
+                cols="20"
+                readonly
+            ></textarea>
+            
+            <button style="float: right" class="open-button" onclick="openForm()">
+                Chat
+            </button>
+            
+            <div style="float: right" class="chat-popup" id="myForm">
+                <form class="form-container">
+                    <h1 id="chat-button" onclick="document.getElementById('chat-button').style.display='none'">Chat</h1>
+                
+                    <label for="msg"><b>Message</b></label>
+                    <textarea
+                        placeholder="Type message..."
+                        id="msg"
+                        name="msg"
+                        required
+                    ></textarea>
+                
+                    <button type="button" class="btn send" id="send" onclick="sendt()">
+                        Send
+                    </button>
+                    <button type="button" class="btn cancel" onclick="closeForm()">
+                        Close
+                    </button>
+                </form>
+            </div>
+        </div>
+    {% endblock %}

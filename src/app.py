@@ -1,24 +1,9 @@
-from fastapi import FastAPI  # , Request, Depends
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 
-from .routers import main
+from .routers import chat
 
-# from .dependencies import get_query_token, get_token_header
-# from .internal import admin
+app = FastAPI()
+app.mount("/static", StaticFiles(directory="src/static"), name="static")
 
-
-app = FastAPI(title="App", description="The app", version="0.1.0")
-
-app.include_router(main.router)
-# app.include_router(
-#     admin.router,
-#     prefix="/admin",
-#     tags=["admin"],
-#     dependencies=[Depends(get_token_header)],
-#     responses={418: {"description": "I'm a teapot"}},
-# )
-
-
-@app.get("/")
-async def root():
-    """The root"""
-    return {"message": "Hello Bigger Applications!"}
+app.include_router(chat.router)
