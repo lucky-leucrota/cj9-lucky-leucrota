@@ -1,6 +1,6 @@
 import pytest
 
-from src.app import app
+from src.main import app
 
 baseUrl = "http://localhost:8000"  # Change the baseUrl after the production build.
 

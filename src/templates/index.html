@@ -2,43 +2,43 @@
     {% block title %}Home{% endblock %}
     {% block custom_files %}
     <link rel="stylesheet" href={{ url_for("static", path="/style.css") }} />
-    <script src={{ url_for("static", path="/script.js") }}></script>
     {% endblock %}
     {% block body %}
-        <div>
+        <h2>Your Name: <span id="ws-id"></span></h2>
+        <div style="display: flex; justify-content: space-between; align-content: center;">
             <h3 style="margin-left: 30px; margin-top: 30px">Your Messages ...</h3>
             <textarea
                 style="float: left"
                 placeholder="your message..."
-                id="texta"
+                id="messages"
                 rows="33"
                 cols="20"
                 readonly
             ></textarea>
-            
-            <button style="float: right" class="open-button" onclick="openForm()">
-                Chat
-            </button>
-            
-            <div style="float: right" class="chat-popup" id="myForm">
-                <form class="form-container">
+            <div class="chat-popup" style="float: right;">
+                <form class="form-container" id="dragme" draggable="true">
                     <h1>Chat</h1>
                 
                     <label for="msg"><b>Message</b></label>
                     <textarea
                         placeholder="Type message..."
-                        id="msg"
+                        id="messageText"
                         name="msg"
                         required
                     ></textarea>
                 
-                    <button type="button" class="btn send" id="send" onclick="sendt()">
+                    <button type="button" class="btn send" id="send" onclick="sendMessage(event)">
                         Send
                     </button>
-                    <button type="button" class="btn cancel" onclick="closeForm()">
-                        Close
                     </button>
                 </form>
             </div>
+            <!--A div positioned on the right that takes js and executes them-->
+            <textarea class="code-text" id="code" rows="33" cols="20"></textarea> <br>
+            <code id="output"></code>
+            <!--Run button-->
+            <button class="btn run" id="run" onclick="run('#code')">Run</button>
+            <h3>Code Output on Dev-Console</h3>
         </div>
+        <script src={{ url_for("static", path="/script.js") }}></script>
     {% endblock %}
