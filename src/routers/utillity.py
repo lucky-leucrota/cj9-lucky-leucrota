@@ -46,6 +46,6 @@ class ConnectionManager:
         else:
             for connection in self.active_connections:
                 if connection != websocket:
-                    await connection.send_text(f"{client_name}: {caesar(message, random.randint(0, 25), alphabets)}")
+                    await connection.send_text(f"{client_name}: {caesar(message, random.randint(1, 100), alphabets)}")
                 else:
                     await connection.send_text(f"You: {message}")
