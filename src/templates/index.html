@@ -1,18 +1,20 @@
 {% extends "base.html" %}
     {% block title %}Home{% endblock %}
     {% block custom_files %}
+    <script src={{ url_for("static", path="/prism.js") }}></script>
+    <link href={{ url_for("static", path="/prism.css") }} rel="stylesheet" />
     <link rel="stylesheet" href={{ url_for("static", path="/style.css") }} />
     {% endblock %}
     {% block body %}
         <h2>Your Name: <span id="ws-id"></span></h2>
-        <div style="display: flex; justify-content: space-between; align-content: center;">
+        <div>
             <h3 style="margin-left: 30px; margin-top: 30px">Your Messages ...</h3>
             <textarea
                 style="float: left"
                 placeholder="your message..."
                 id="messages"
-                rows="33"
-                cols="20"
+                rows="50"
+                cols="75"
                 readonly
             ></textarea>
             <div class="chat-popup" style="float: right;">
@@ -33,12 +35,15 @@
                     </button>
                 </form>
             </div>
-            <!--A div positioned on the right that takes js and executes them-->
-            <textarea class="code-text" id="code" rows="33" cols="20"></textarea> <br>
-            <code id="output"></code>
+            <div class="code">
+                <code-input lang="JS" id="code-text" style="resize: both; overflow: hidden; width: 588px; height: 1210px;" placeholder="console.log('Code here. the output is in the Dev-Console.')"></code-input>
+            </div>
             <!--Run button-->
-            <button class="btn run" id="run" onclick="run('#code')">Run</button>
-            <h3>Code Output on Dev-Console</h3>
+            <button style="width: 64px; height: 32px; border: black solid; text-align: center;" class="text-center" id="run" onclick="run('#code')">Run</button>
+            <p class="text-center">This is where errors are displayed</p>
+            <code class="text-center" id="output">Error: </code>
         </div>
-        <script src={{ url_for("static", path="/script.js") }}></script>
+    {% endblock %}
+    {% block custom_js %}
+    <script src={{ url_for("static", path="/script.js") }}></script>
     {% endblock %}
