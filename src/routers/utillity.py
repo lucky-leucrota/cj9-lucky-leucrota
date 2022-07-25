@@ -1,12 +1,14 @@
-from fastapi import WebSocket
-from typing import List
-
 import random
 import string
+from typing import List
+
+from fastapi import WebSocket
 
 
 def caesar(text, step, alphabets):
+    """Caesar cipher"""
     def shift(alphabet):
+        """Shift alphabet"""
         return alphabet[step:] + alphabet[:step]
 
     shifted_alphabets = tuple(map(shift, alphabets))
@@ -20,10 +22,14 @@ alphabets = (string.ascii_lowercase, string.ascii_uppercase, string.digits)
 
 
 class ConnectionManager:
+    """Connection Manager"""
+
     def __init__(self) -> None:
+        """Initialize Connection Manager"""
         self.active_connections: List[WebSocket] = []
 
     async def connect(self, client_name: str, websocket: WebSocket) -> None:
+        """Connect to the chat room"""
         await websocket.accept()
         self.active_connections.append(websocket)
 
@@ -32,6 +38,7 @@ class ConnectionManager:
                 await connection.send_text(f"{client_name} join the chat room.")
 
     def disconnect(self, websocket: WebSocket) -> None:
+        """Disconnect from the chat room"""
         self.active_connections.remove(websocket)
 
     async def broadcast(
@@ -41,6 +48,7 @@ class ConnectionManager:
         message: str = "",
         disconnected: bool = False,
     ) -> None:
+        """Broadcast message to all active connections"""
         if disconnected:
             for connection in self.active_connections:
                 if connection != websocket:

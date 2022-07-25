@@ -1,5 +1,6 @@
-from fastapi import APIRouter, WebSocket, Request, WebSocketDisconnect
+from fastapi import APIRouter, Request, WebSocket, WebSocketDisconnect
 from fastapi.templating import Jinja2Templates
+
 from .utillity import ConnectionManager
 
 router = APIRouter()
@@ -17,6 +18,7 @@ async def index(request: Request):
 
 @router.websocket("/ws/{client_name}")
 async def websocket_endpoint(websocket: WebSocket, client_name: str):
+    """Websocket Route"""
     await manager.connect(client_name, websocket)
 
     try:

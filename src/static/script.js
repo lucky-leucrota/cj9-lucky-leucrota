@@ -40,7 +40,7 @@ const run = async () => {
         console.log(err);
         show('warning-alert');
     }
-    
+
 }
 
 codeInput.registerTemplate("syntax-highlighted", codeInput.templates.prism(Prism, []));
