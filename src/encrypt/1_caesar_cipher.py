@@ -18,6 +18,7 @@ def caeser_encrypt(word, key):
 
     return enc
 
+
 def caeser_decrypt(word, key):
     letters = (
         string.ascii_lowercase
@@ -34,6 +35,7 @@ def caeser_decrypt(word, key):
 
     return enc
 
-key=randint(1, 26)
+
+key = randint(1, 26)
 print(caeser_encrypt("ATTACKATm4Once", key))
-print(caeser_decrypt(caeser_encrypt("ATTACKATm4Once", key),key))
+print(caeser_decrypt(caeser_encrypt("ATTACKATm4Once", key), key))

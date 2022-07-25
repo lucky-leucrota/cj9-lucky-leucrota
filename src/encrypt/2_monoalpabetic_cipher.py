@@ -11,6 +11,7 @@ def mono_alpabetic_cipher_encrypt(pt):
             ans += i
     return ans
 
+
 def mono_alpabetic_cipher_decrypt(pt):
     ans = ""
     for i in pt:
