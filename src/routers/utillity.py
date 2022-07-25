@@ -4,17 +4,20 @@ from typing import List
 import random
 import string
 
+
 def caesar(text, step, alphabets):
     def shift(alphabet):
         return alphabet[step:] + alphabet[:step]
 
     shifted_alphabets = tuple(map(shift, alphabets))
-    joined_aphabets = ''.join(alphabets)
-    joined_shifted_alphabets = ''.join(shifted_alphabets)
+    joined_aphabets = "".join(alphabets)
+    joined_shifted_alphabets = "".join(shifted_alphabets)
     table = str.maketrans(joined_aphabets, joined_shifted_alphabets)
     return text.translate(table)
 
+
 alphabets = (string.ascii_lowercase, string.ascii_uppercase, string.digits)
+
 
 class ConnectionManager:
     def __init__(self) -> None:
@@ -46,6 +49,8 @@ class ConnectionManager:
         else:
             for connection in self.active_connections:
                 if connection != websocket:
-                    await connection.send_text(f"{client_name}: {caesar(message, random.randint(1, 100), alphabets)}")
+                    En_message = caesar(message, random.randint(1, 25), alphabets)
+                    print(message)
+                    await connection.send_text(f"{client_name}: {En_message}")
                 else:
                     await connection.send_text(f"You: {message}")

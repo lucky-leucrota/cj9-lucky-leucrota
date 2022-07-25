@@ -8,10 +8,12 @@ templates = Jinja2Templates(directory="src/templates")
 
 manager = ConnectionManager()
 
+
 @router.get("/")
 async def index(request: Request):
     """Index Route"""
     return templates.TemplateResponse("index.html", {"request": request})
+
 
 @router.websocket("/ws/{client_name}")
 async def websocket_endpoint(websocket: WebSocket, client_name: str):

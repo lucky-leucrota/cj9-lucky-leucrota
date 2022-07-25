@@ -14,11 +14,33 @@ function sendMessage(event) {
     event.preventDefault();
 }
 
-function run () {
-    const code = document.getElementById('code-text').innerText;
-    const resultEl = document.getElementById('output')
-    const fn = new Function(code)
-    resultEl.innerHTML = fn()
+async function main() {
+    let pyodide = await loadPyodide();
+    console.log("Ready!\n");
+    return pyodide;
+}
+
+const show = (Id) => {
+    document.getElementById(Id).style.display = "block";
+}
+
+const hide = (Id) => {
+    document.getElementById(Id).style.display = "none";
+}
+
+let pyodideReadyPromise = main();
+
+const run = async () => {
+    let code = document.getElementById("code-text").value;
+    let pyodide = await pyodideReadyPromise;
+    try {
+        pyodide.runPython(code);
+        show("success-alert");
+    } catch (err) {
+        console.log(err);
+        show('warning-alert');
+    }
+    
 }
 
 codeInput.registerTemplate("syntax-highlighted", codeInput.templates.prism(Prism, []));

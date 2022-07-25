@@ -36,12 +36,10 @@
                 </form>
             </div>
             <div class="code">
-                <code-input lang="JS" id="code-text" style="resize: both; overflow: hidden; width: 588px; height: 1210px;" placeholder="console.log('Code here. the output is in the Dev-Console.')"></code-input>
+                <code-input lang="py" id="code-text" style="resize: both; overflow: hidden; width: 588px; height: 1210px;" placeholder="print('Code here. Output in the Dev-Console')"></code-input>
             </div>
             <!--Run button-->
-            <button style="width: 64px; height: 32px; border: black solid; text-align: center;" class="text-center" id="run" onclick="run('#code')">Run</button>
-            <p class="text-center">This is where errors are displayed</p>
-            <code class="text-center" id="output">Error: </code>
+            <button style="width: 64px; height: 32px; border: black solid; text-align: center;" class="text-center" id="run" onclick="run()">Run</button>
         </div>
     {% endblock %}
     {% block custom_js %}
