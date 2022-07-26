@@ -1,47 +1,38 @@
 {% extends "base.html" %}
-    {% block title %}Home{% endblock %}
-    {% block custom_files %}
-    <script src={{ url_for("static", path="/prism.js") }}></script>
-    <link href={{ url_for("static", path="/prism.css") }} rel="stylesheet" />
-    <link rel="stylesheet" href={{ url_for("static", path="/style.css") }} />
-    {% endblock %}
-    {% block body %}
-        <h2>Your Name: <span id="ws-id"></span></h2>
-        <div>
-            <h3 style="margin-left: 30px; margin-top: 30px">Your Messages ...</h3>
-            <textarea
-                style="float: left"
-                placeholder="your message..."
-                id="messages"
-                rows="50"
-                cols="62"
-                readonly
-            ></textarea>
-            <div class="chat-popup" style="float: right;">
-                <form class="form-container" id="dragme" draggable="true">
-                    <h1>Chat</h1>
-
-                    <label for="msg"><b>Message</b></label>
-                    <textarea
-                        placeholder="Type message..."
-                        id="messageText"
-                        name="msg"
-                        required
-                    ></textarea>
-
-                    <button type="button" class="btn send" id="send" onclick="sendMessage(event, ws)">
-                        Send
-                    </button>
-                    </button>
-                </form>
+{% block title %}Home{% endblock %}
+{% block custom_files %}
+    <link rel="stylesheet" href={{ url_for('static', path='css/index.css') }}>
+{% endblock %}
+{% block body %}
+    <div id="Main">
+        <h1 class="text-center">Dis-Code</h1>
+        <hr />
+        <a id="chat-button" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" href="/chat">
+            To chat
+        </a>
+        <br>
+        <br>
+        <div class="container">
+            <div class="col-md-12">
+                <h2 class="text-center">About</h2>
+                <p class="text-center">
+                    Dis-Code is a Chat, That works like an IRC-Server. The messages will not be decrypted 25% of the time. You have to use your python skills to decrypt them.
+                </p>
             </div>
-            <div class="code">
-                <code-input lang="py" id="code-text" style="resize: both; overflow: hidden; width: 588px; height: 1210px;" placeholder="print('Code here. Output in the Dev-Console')"></code-input>
+            <br>
+            <br>
+            <div class="col-md-12">
+                <h2 class="text-center">Features</h2>
+                <ul class="text-center">
+                    <li class="text-center">A fully encrypted and decrypted chat (well, sort of 😅)</li>
+                    <li class="text-center">An editor that runs python</li>
+                </ul>
             </div>
-            <!--Run button-->
-            <button style="width: 64px; height: 32px; border: black solid; text-align: center;" class="text-center" id="run" onclick="run()">Run</button>
         </div>
-    {% endblock %}
-    {% block custom_js %}
-    <script src={{ url_for("static", path="/script.js") }}></script>
-    {% endblock %}
+        <br>
+        <br>
+    </div>
+{% endblock %}
+{% block custom_js %}
+    <script src={{ url_for('static', path='js/index.js') }}></script>
+{% endblock %}

@@ -10,10 +10,10 @@ templates = Jinja2Templates(directory="src/templates")
 manager = ConnectionManager()
 
 
-@router.get("/")
+@router.get("/chat")
 async def index(request: Request):
     """Root page of the chat application."""
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse("chat.html", {"request": request})
 
 
 @router.websocket("/ws/{client_name}")

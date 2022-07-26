@@ -20,6 +20,11 @@ body {
     display: block;
 }
 
+#messageText{
+    background-color: #ffffff;
+    color: #000000;
+}
+
 .chat-popup {
     bottom: 200;
     right: 405px;
@@ -31,7 +36,7 @@ body {
 .form-container {
     max-width: 300px;
     padding: 10px;
-    background-color: white;
+    background-color: black;
     right: 0;
 }
 
@@ -41,14 +46,15 @@ body {
     padding: 15px;
     margin: 5px 0 22px 0;
     border: none;
-    background: #f1f1f1;
     resize: none;
     min-height: 200px;
+    white-space: nowrap;
+    overflow-x: scroll;
 }
 
 /* When the textarea gets focus, do something */
 .form-container textarea:focus {
-    background-color: #ddd;
+    background-color: rgb(35, 35, 35);
     outline: none;
 }
 
