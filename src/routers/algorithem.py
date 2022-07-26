@@ -1,4 +1,5 @@
 import random
+from typing import List
 import string
 import secrets
 
@@ -86,22 +87,22 @@ def one_time_pad_keygen(length: int) -> bytes:
     return secrets.token_bytes(length)
 
 
-def permutation_cipher_encrypt(plain_text: bytes, key: list[int]) -> bytes:
+def permutation_cipher_encrypt(plain_text: bytes, key: List[int]) -> bytes:
     cipher_text = [c for c in plain_text]
     for i in range(len(plain_text)):
         cipher_text[i] = key[plain_text[i]]
     return bytes(cipher_text)
 
-def permutation_cipher_decrypt(cipher_text: bytes, key: list[int])->bytes:
+def permutation_cipher_decrypt(cipher_text: bytes, key: List[int])->bytes:
     return permutation_cipher_encrypt(cipher_text,permutation_cipher_inverse_permutation(key)) 
 
-def permutation_cipher_inverse_permutation(key: list[int]) -> list[int]:
+def permutation_cipher_inverse_permutation(key: List[int]) -> List[int]:
     inverse_permutation = [0]*len(key)
     for i in range(len(key)):
         inverse_permutation[key[i]] = i
     return inverse_permutation
 
-def permutation_cipher_gen_key() -> list[int]:
+def permutation_cipher_gen_key() -> List[int]:
     key = [i for i in range(256)]
     random.shuffle(key)
     return key
