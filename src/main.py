@@ -8,7 +8,7 @@ from .routers import chat
 # App Config
 app = FastAPI(
     title="Dis-Code",
-    version="Dev.3.4.0",
+    version="Dev.3.5.0",
     docs_url=None,
     redoc_url=None,
     openapi_url=None
@@ -22,8 +22,4 @@ app.include_router(chat.router)
 async def Custom_404_handler(request: Request, __):
     """Custom 404 handler"""
     return templates.TemplateResponse("404.html", {"request": request}, status_code=404)
-
-@app.get("/")
-def index(request: Request):
-    """Root page of the chat application."""
-    return templates.TemplateResponse("Index.html", {"request": request})
+    
