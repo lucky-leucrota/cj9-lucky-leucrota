@@ -30,3 +30,6 @@ build/
 # MacOS
 .DS_Store
 .vscode/
+
+#vim
+.vim
