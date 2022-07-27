@@ -40,6 +40,8 @@ class CipherFacade:
         else:
             self.key = self.cipher.genkey()
 
+        self.config = config
+
     def encrypt(self, plain_text: str) -> str:
         encoded_plaintext = self.encoder.encode_plaintext(plain_text)
         encrypted_text = self.cipher.encrypt(encoded_plaintext, self.key)
@@ -49,3 +51,6 @@ class CipherFacade:
         encoded_ciphertext = self.encoder.encode_encrypted_message(cipher_text)
         decrypted_text = self.cipher.decrypt(encoded_ciphertext, self.key)
         return self.encoder.decode_decrypted_message(decrypted_text)
+
+    def get_key(self):
+        return self.encoder.decode_key(self.key)

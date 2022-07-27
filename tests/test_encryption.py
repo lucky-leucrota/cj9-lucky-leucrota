@@ -38,7 +38,7 @@ class TestCipherReversibility:
 
 class TestCipherKeygen:
     def keygen_test(self, facade, **kwargs):
-        assert facade.cipher.genkey(**kwargs) != facade.key
+        assert facade.cipher.genkey(**kwargs) != facade.get_key()
 
     def test_keygen_ceaser_cipher(self):
         facade = CipherFacade({"scheme": "CeaserCipher"})

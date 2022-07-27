@@ -38,4 +38,4 @@ class SubsitutionCipherEncoder:
         return str(decrypted_message, "utf-8")
 
     def decode_key(self, key: bytes) -> str:
-        return key.hex()
+        return bytes(key).hex()
