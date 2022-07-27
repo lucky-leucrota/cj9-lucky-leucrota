@@ -7,3 +7,4 @@ Jinja2
 pre-commit
 pytest
 trio
+black
