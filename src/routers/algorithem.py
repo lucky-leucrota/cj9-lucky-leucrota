@@ -109,10 +109,6 @@ def permutation_cipher_decrypt(cipher_text: bytes, key: List[int]) -> bytes:
         cipher_text, permutation_cipher_inverse_permutation(key)
     )
 
-
-
-
-
 def permutation_cipher_gen_key() -> List[int]:
     key = [i for i in range(256)]
     random.shuffle(key)

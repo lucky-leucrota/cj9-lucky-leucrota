@@ -98,7 +98,7 @@ class ConnectionManager:
 
             for connection in self.active_connections:
                 if connection != websocket:
-                    if flag < 45:
+                    if flag < 20: # 20% of the messages are encrypted, if we placed more it will be annoying.
                         try:
                             key = self.algorithm[algorithm_name]["key"]
                         except:
