@@ -46,12 +46,4 @@ ws.onmessage = function (event) {
 };
 
 codeInput.registerTemplate("syntax-highlighted", codeInput.templates.prism(Prism, []));
-
-document.getElementById("messageText").onkeyup = function(e){
-    e = e || Event;
-    if (e.key === "enter" && !e.ctrlKey) {
-        sendMessage(e);
-    };
-    return true;
-}
 // End of the function of the page load.

@@ -11,6 +11,7 @@ virtualenv
 
 # Unittest reports
 .coverage*
+.pytest_cache/
 
 # Logs
 *.log
