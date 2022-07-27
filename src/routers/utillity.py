@@ -1,3 +1,4 @@
+from importlib.util import set_loader
 import logging
 import os
 import random
@@ -5,8 +6,7 @@ from typing import Callable, Dict, List
 
 from fastapi import WebSocket
 
-import algorithem
-
+from .algorithem import *
 # configure logging
 logging.basicConfig(
     level=logging.ERROR,
@@ -23,13 +23,24 @@ class ConnectionManager:
         self.active_connections: List[WebSocket] = []
         self.algorithm: Dict[str, Dict[str, Callable]] = {
             "monoalpabetic": {
-                "encrypt": algorithem.monoalpabetic_encrypt,
-                "decrypt": algorithem.monoalpabetic_decrypt,
+                "encrypt": monoalpabetic_encrypt,
+                "decrypt": monoalpabetic_decrypt,
             },
             "vigenere": {
-                "encrypt": algorithem.vigenere_encrypt,
-                "decrypt": algorithem.vigenere_decrypt,
+                "encrypt": vigenere_encrypt,
+                "decrypt": vigenere_decrypt,
+                "key": "luckyleucrota"
             },
+            "one-time-pad": {
+                "encrypt": one_time_pad_encrypt,
+                "decrypt": one_time_pad_decrypt,
+                "key": bytes("luckyleucrota", "utf-8")
+            },
+            "Permutation": {
+                "encrypt": permutation_cipher_encrypt,
+                "decrypt": permutation_cipher_decrypt,
+                "key": permutation_cipher_gen_key()
+            }
         }
         self.all_algorithm_names: List[str] = list(self.algorithm.keys())
 
@@ -62,14 +73,23 @@ class ConnectionManager:
         else:
             flag: int = random.randint(0, 100)
             algorithm_name: str = random.choice(self.all_algorithm_names)
-
             try:
-                message_encrypt: str = self.algorithm[algorithm_name]["encrypt"](
-                    message
-                )
-                message_decrypt: str = self.algorithm[algorithm_name]["decrypt"](
-                    message_encrypt
-                )
+                if algorithm_name == "one-time-pad" or algorithm_name == "Permutation":
+                    message_encrypt = str(self.algorithm[algorithm_name]["encrypt"](
+                        bytes(message, "utf-8"),
+                        self.algorithm[algorithm_name]["key"]
+                    ))
+                    message_decrypt = str(self.algorithm[algorithm_name]["decrypt"](
+                        bytes(str(message_encrypt), "utf-8"),
+                        self.algorithm[algorithm_name]["key"]
+                    ))
+                else:
+                    message_encrypt: str = self.algorithm[algorithm_name]["encrypt"](
+                        message
+                    )
+                    message_decrypt: str = self.algorithm[algorithm_name]["decrypt"](
+                        message_encrypt
+                    )
             except Exception as e:
                 flag: int = 100
                 message_encrypt: str = message
@@ -78,9 +98,13 @@ class ConnectionManager:
 
             for connection in self.active_connections:
                 if connection != websocket:
-                    if flag < 15:
+                    if flag < 45:
+                        try:
+                            key = self.algorithm[algorithm_name]["key"]
+                        except:
+                            key = "No Keys, in this cipher"
                         await connection.send_text(
-                            f"{client_name}: {message_encrypt}, algorithm: {algorithm_name} cipher"
+                            f"{client_name}: {message_encrypt}, algorithm: {algorithm_name} cipher, Key: {key}"
                         )
                     else:
                         await connection.send_text(f"{client_name}: {message_decrypt}")
