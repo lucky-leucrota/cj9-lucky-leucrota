@@ -3,6 +3,7 @@ function sendMessage(event, ws) {
     var input = document.getElementById("messageText");
     ws.send(input.value);
     input.value = "";
+
     event.preventDefault();
 }
 
@@ -41,8 +42,22 @@ var client_name = prompt("What is your name?");
 document.querySelector("#ws-id").textContent = client_name;
 var ws = new WebSocket(`ws://${window.location.host}/ws/${client_name}`);
 ws.onmessage = function (event) {
-    var messages = document.getElementById("messages");
-    messages.value += event.data + '\n';
+    // var messages = document.getElementById("messages");
+    // messages.value += event.data + '\n';
+    messagesContainer = document.getElementById("messages-container");
+    var chatBubble = document.createElement("div");
+    chatBubble.className = "chat-bubble";
+
+    var chatName = document.createElement("span");
+    chatName.textContent = event.data.split(":", 2)[0];
+    var chatMessage = document.createElement("p");
+    chatMessage.textContent = event.data.split(":", 2)[1];
+
+    messagesContainer.appendChild(chatBubble);
+    chatBubble.appendChild(chatName);
+    chatBubble.appendChild(chatMessage);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    // messagesContainer.innerHTML += event.data + '\n';
 };
 
 codeInput.registerTemplate("syntax-highlighted", codeInput.templates.prism(Prism, []));
