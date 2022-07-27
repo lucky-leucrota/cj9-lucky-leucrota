@@ -65,7 +65,7 @@ class ConnectionManager:
         config = {"scheme": algorithm_name}
 
         if config["scheme"] == "OneTimePad":
-            config["key_args"] = {"length": len(message)}
+            config["key_args"] = {"length": message_len}
         elif config["scheme"] in ["TranspositionCipher", "VigenereCipher"]:
             config["key_args"] = {"length": 6}
 
@@ -81,7 +81,7 @@ class ConnectionManager:
             payload["decrypted_message"] = encryptor.decrypt(
                 payload["encrypted_message"]
             )
-            payload["key"] = cipher_facade.get_key()
+            payload["key"] = encryptor.get_key()
 
         except Exception as e:
             payload = {"message": message}
