@@ -1,41 +1,37 @@
-from typing import Callable, Dict, List
-from fastapi import WebSocket
-from .algorithem import *
-
+import logging
+import os
 import random
-# import string
-#
-# def caesar(text, step, alphabets):
-#     """Caesar cipher"""
-#     def shift(alphabet):
-#         """Shift alphabet"""
-#         return alphabet[step:] + alphabet[:step]
+from typing import Callable, Dict, List
 
-#     shifted_alphabets = tuple(map(shift, alphabets))
-#     joined_aphabets = "".join(alphabets)
-#     joined_shifted_alphabets = "".join(shifted_alphabets)
-#     table = str.maketrans(joined_aphabets, joined_shifted_alphabets)
-#     return text.translate(table)
+from fastapi import WebSocket
 
+import algorithem
 
-# alphabets = (string.ascii_lowercase, string.ascii_uppercase, string.digits)
+# configure logging
+logging.basicConfig(
+    level=logging.ERROR,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    datefmt="%H:%M:%S",
+    style="%",
+    filemode="a",
+    filename=os.path.abspath("src/logs/chat.log"),
+)
 
 
 class ConnectionManager:
-    """The Websocket Manager"""
-
     def __init__(self) -> None:
         self.active_connections: List[WebSocket] = []
         self.algorithm: Dict[str, Dict[str, Callable]] = {
             "monoalpabetic": {
-                "encrypt": monoalpabetic_encrypt,
-                "decrypt": monoalpabetic_decrypt,
+                "encrypt": algorithem.monoalpabetic_encrypt,
+                "decrypt": algorithem.monoalpabetic_decrypt,
             },
             "vigenere": {
-                "encrypt": vigenere_encrypt,
-                "decrypt": vigenere_decrypt,
+                "encrypt": algorithem.vigenere_encrypt,
+                "decrypt": algorithem.vigenere_decrypt,
             },
         }
+        self.all_algorithm_names: List[str] = list(self.algorithm.keys())
 
     async def connect(self, client_name: str, websocket: WebSocket) -> None:
         """Add a new connection to the list of active connections."""
@@ -64,24 +60,25 @@ class ConnectionManager:
                     await connection.send_text(f"{client_name} left the chat room.")
 
         else:
-            flag = random.randint(0, 100)
-            algorithm_name = random.choice(list(self.algorithm.keys()))
+            flag: int = random.randint(0, 100)
+            algorithm_name: str = random.choice(self.all_algorithm_names)
 
             try:
-                message_encrypt = self.algorithm[algorithm_name]["encrypt"](message)
-                message_decrypt = self.algorithm[algorithm_name]["decrypt"](
+                message_encrypt: str = self.algorithm[algorithm_name]["encrypt"](
+                    message
+                )
+                message_decrypt: str = self.algorithm[algorithm_name]["decrypt"](
                     message_encrypt
                 )
             except Exception as e:
-                # TODO: add logging
-                print(e)
-                message_encrypt = message
-                message_decrypt = message
-                flag = 100
+                flag: int = 100
+                message_encrypt: str = message
+                message_decrypt: str = message
+                logging.error(f"in encryption/decryption: {e}")
 
             for connection in self.active_connections:
                 if connection != websocket:
-                    if flag < 25:
+                    if flag < 15:
                         await connection.send_text(
                             f"{client_name}: {message_encrypt}, algorithm: {algorithm_name} cipher"
                         )
