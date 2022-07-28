@@ -1,59 +1,100 @@
 import pytest
-import collections
-from src.routers.algorithem import (
-    one_time_pad_encrypt,
-    one_time_pad_decrypt,
-    one_time_pad_keygen,
-)
-from src.routers.algorithem import (
-    permutation_cipher_encrypt,
-    permutation_cipher_decrypt,
-    permutation_cipher_gen_key,
-    permutation_cipher_inverse_permutation,
-)
+from src.encrypt.encryption_facade import CipherFacade
 
 
-class TestOneTimePad:
-    def test_encryption(self):
-        plain_text = bytes("hello", "utf-8")
-        key = bytes("world", "utf-8")
-        cipher_text = one_time_pad_encrypt(plain_text, key)
-        decrypted_text = one_time_pad_decrypt(cipher_text, key)
-        assert plain_text == decrypted_text
+class TestCipherReversibility:
+    def reversibility_test(self, facade, plain_text):
+        assert facade.decrypt(facade.encrypt(plain_text))
 
-    def test_encryption_fail(self):
-        plain_text = bytes("hello", "utf-8")
-        key1 = bytes("world", "utf-8")
-        key2 = bytes("WORLD", "utf-8")
-        cipher_text = one_time_pad_encrypt(plain_text, key1)
-        decrypted_text = one_time_pad_decrypt(cipher_text, key2)
-        assert plain_text != decrypted_text
+    def test_reversibility_ceaser_cipher(self):
+        plain_text = "Hello সিয়াম"
+        facade = CipherFacade({"scheme": "CeaserCipher"})
+        self.reversibility_test(facade, plain_text)
 
-    def test_keygen_randomness(self):
-        assert one_time_pad_keygen(5) != one_time_pad_keygen(5)
+    def test_reversibility_one_time_pad(self):
+        plain_text = "Hello সিয়াম"
+        facade = CipherFacade(
+            {"scheme": "OneTimePad", "key_args": {"length": len(plain_text)}}
+        )
+        self.reversibility_test(facade, plain_text)
 
-    def test_keygen_length(self):
-        assert len(one_time_pad_keygen(1024)) == 1024
+    def test_reversibility_substitution_cipher(self):
+        plain_text = "Hello সিয়াম"
+        facade = CipherFacade({"scheme": "SubstitutionCipher"})
+        self.reversibility_test(facade, plain_text)
+
+    def test_reversibility_transposition_cipher(self):
+        plain_text = "Hello সিয়াম"
+        facade = CipherFacade(
+            {"scheme": "TranspositionCipher", "key_args": {"length": 20}}
+        )
+        self.reversibility_test(facade, plain_text)
+
+    def test_reversibility_viginere(self):
+        plain_text = "Hello সিয়াম"
+        facade = CipherFacade({"scheme": "VigenereCipher", "key_args": {"length": 8}})
+        self.reversibility_test(facade, plain_text)
 
 
-class TestPermutationCipher:
-    def test_encryption(self):
-        plain_text = bytes("Hello World!", "utf-8")
-        key = permutation_cipher_gen_key()
-        cipher_text = permutation_cipher_encrypt(plain_text, key)
-        decrypted_text = permutation_cipher_decrypt(cipher_text, key)
+class TestCipherKeygen:
+    def keygen_test(self, facade, **kwargs):
+        assert facade.cipher.genkey(**kwargs) != facade.get_key()
 
-        assert plain_text == decrypted_text
+    def test_keygen_ceaser_cipher(self):
+        facade = CipherFacade({"scheme": "CeaserCipher"})
+        self.keygen_test(facade)
 
-    def test_encryption_fail(self):
-        plain_text = bytes("Hello World!", "utf-8")
-        key1 = permutation_cipher_gen_key()
-        key2 = permutation_cipher_gen_key()
-        cipher_text = permutation_cipher_encrypt(plain_text, key1)
-        decrypted_text = permutation_cipher_decrypt(cipher_text, key2)
+    def test_keygen_one_time_pad(self):
+        config = {"scheme": "OneTimePad", "key_args": {"length": 20}}
+        facade = CipherFacade(config)
+        self.keygen_test(facade, **config["key_args"])
 
-        assert plain_text != decrypted_text
+    def test_keygen_substitution_cipher(self):
+        facade = CipherFacade({"scheme": "SubstitutionCipher"})
+        self.keygen_test(facade)
 
-    def test_keygen_is_permutation(self):
-        key = permutation_cipher_gen_key()
-        assert collections.Counter(range(256)) == collections.Counter(key)
+    def test_keygen_transposition_cipher(self):
+        config = {"scheme": "TranspositionCipher", "key_args": {"length": 20}}
+        facade = CipherFacade(config)
+        self.keygen_test(facade, **config["key_args"])
+
+    def test_keygen_viginere(self):
+        config = {"scheme": "VigenereCipher", "key_args": {"length": 8}}
+        facade = CipherFacade(config)
+        self.keygen_test(facade, **config["key_args"])
+
+
+class EncryptionSanityCheck:
+    def sanity_test(self, facade, plain_text):
+        encrypted_text = facade.encrypt(plain_text)
+        assert type(encrypted_text) == str
+        assert facade.encrypt(plain_text) != plain_text
+
+    def test_sanity_ceaser_cipher(self):
+        plain_text = "Hello সিয়াম"
+        facade = CipherFacade({"scheme": "CeaserCipher"})
+        self.sanity_test(facade, plain_text)
+
+    def test_sanity_one_time_pad(self):
+        plain_text = "Hello সিয়াম"
+        facade = CipherFacade(
+            {"scheme": "OneTimePad", "key_args": {"length": len(plain_text)}}
+        )
+        self.sanity_test(facade, plain_text)
+
+    def test_sanity_substitution_cipher(self):
+        plain_text = "Hello সিয়াম"
+        facade = CipherFacade({"scheme": "SubstitutionCipher"})
+        self.sanity_test(facade, plain_text)
+
+    def test_sanity_transposition_cipher(self):
+        plain_text = "Hello সিয়াম"
+        facade = CipherFacade(
+            {"scheme": "TranspositionCipher", "key_args": {"length": 20}}
+        )
+        self.sanity_test(facade, plain_text)
+
+    def test_sanity_viginere(self):
+        plain_text = "Hello সিয়াম"
+        facade = CipherFacade({"scheme": "VigenereCipher", "key_args": {"length": 8}})
+        self.sanity_test(facade, plain_text)
