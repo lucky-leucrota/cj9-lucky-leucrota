@@ -1,14 +1,13 @@
-from importlib.util import set_loader
 import logging
 import os
 import random
 from typing import Callable, Dict, List
-
-from src.encrypt.encryption_facade import CipherFacade
+from .algorithms import *
 
 from fastapi import WebSocket
 
-# from .algorithem import *
+
+
 # configure logging
 logging.basicConfig(
     level=logging.ERROR,
@@ -23,29 +22,25 @@ logging.basicConfig(
 class ConnectionManager:
     def __init__(self) -> None:
         self.active_connections: List[WebSocket] = []
-
-        # self.algorithm: Dict[str, Dict[str, Callable]] = {
-        #     "monoalpabetic": {
-        #         "encrypt": monoalpabetic_encrypt,
-        #         "decrypt": monoalpabetic_decrypt,
-        #     },
-        #     "vigenere": {
-        #         "encrypt": vigenere_encrypt,
-        #         "decrypt": vigenere_decrypt,
-        #         "key": "luckyleucrota"
-        #     },
-        #     "one-time-pad": {
-        #         "encrypt": one_time_pad_encrypt,
-        #         "decrypt": one_time_pad_decrypt,
-        #         "key": bytes("luckyleucrota", "utf-8")
-        #     },
-        #     "Permutation": {
-        #         "encrypt": permutation_cipher_encrypt,
-        #         "decrypt": permutation_cipher_decrypt,
-        #         "key": permutation_cipher_gen_key()
-        #     }
-        # }
-        # self.all_algorithm_names: List[str] = list(self.algorithm.keys())
+        self.algorithm: Dict[str, Dict[str, Callable]] = {
+            "monoalpabetic": {
+                "encrypt": monoalpabetic_encrypt,
+                "decrypt": monoalpabetic_decrypt,
+            },
+            "vigenere": {
+                "encrypt": vigenere_encrypt,
+                "decrypt": vigenere_decrypt,
+            },
+            "caeser": {
+                "encrypt": caeser_encrypt,
+                "decrypt": caeser_decrypt,
+            },
+            "tansposition": {
+                "encrypt": tansposition_encrypt,
+                "decrypt": tansposition_decrypt,
+            },
+        }
+        self.all_algorithm_names: List[str] = list(self.algorithm.keys())
 
     async def connect(self, client_name: str, websocket: WebSocket) -> None:
         """Add a new connection to the list of active connections."""
@@ -54,60 +49,11 @@ class ConnectionManager:
 
         for connection in self.active_connections:
             if connection != websocket:
-                await connection.send_text(f"{client_name} join the chat room.")
+                await connection.send_text(f"{client_name} joined the chat room.")
 
     def disconnect(self, websocket: WebSocket) -> None:
         """Remove a connection from the list of active connections."""
         self.active_connections.remove(websocket)
-
-    def _generate_random_encryptor(self, message_len) -> CipherFacade:
-        num = random.randint(0, len(CipherFacade.encryption_schemes) - 1)
-        algorithm_names = list(CipherFacade.encryption_schemes.keys())
-        algorithm_name: str = algorithm_names[num]
-        config = {"scheme": algorithm_name}
-        print(config)
-        print(algorithm_names)
-        if config["scheme"] == "OneTimePad":
-            config["key_args"] = {"length": message_len}
-        elif config["scheme"] in ["TranspositionCipher", "VigenereCipher"]:
-            config["key_args"] = {"length": 6}
-
-        return CipherFacade(config)
-
-    def _generate_encrypted_message_payload(
-        self, encryptor: CipherFacade, message: str
-    ) -> Dict[str, str]:
-        payload = {}
-        try:
-            payload["encryption_scheme"] = encryptor.config["scheme"]
-            payload["encrypted_message"] = encryptor.encrypt(message)
-            payload["decrypted_message"] = encryptor.decrypt(
-                payload["encrypted_message"]
-            )
-            payload["key"] = encryptor.get_key()
-            return payload
-        except Exception as e:
-            payload = {"message": message}
-            logging.error(f"in encryption/decryption: {e}")
-            return payload
-
-    def generate_message(self, client_name: str, message: str) -> str:
-        encryptor = self._generate_random_encryptor(len(message))
-        payload = self._generate_encrypted_message_payload(encryptor, message)
-        print(payload)
-        flag: int = random.randint(0, 100)
-        print(flag)
-        if (
-            flag < 20
-        ):  # 20% of the messages are encrypted, if we placed more it will be annoying.
-            key = payload["key"]
-            if key == None:
-                key = "No Keys, in this cipher"
-
-            return f"{client_name}: {payload['encrypted_message']}, algorithm: {payload['encryption_scheme']} cipher, Key: {payload['key']}"
-
-        else:
-            return f"{client_name}: {payload['decrypted_message']}"
 
     async def broadcast(
         self,
@@ -120,13 +66,32 @@ class ConnectionManager:
         if disconnected:
             for connection in self.active_connections:
                 if connection != websocket:
-                    await connection.send_text(f"{client_name} left the chat room.")
+                    await connection.send_text(f"{client_name} has left the chat room.")
 
         else:
+            flag: int = random.randint(0, 100)
+            algorithm_name: str = random.choice(self.all_algorithm_names)
+
+            try:
+                message_encrypt: str = self.algorithm[algorithm_name]["encrypt"](
+                    message
+                )
+                message_decrypt: str = self.algorithm[algorithm_name]["decrypt"](
+                    message_encrypt
+                )
+            except Exception as e:
+                flag: int = 100
+                message_encrypt: str = message
+                message_decrypt: str = message
+                logging.error(f"in encryption/decryption: {e}")
+
             for connection in self.active_connections:
                 if connection != websocket:
-                    await connection.send_text(
-                        self.generate_message(client_name, message)
-                    )
+                    if flag < 20:
+                        await connection.send_text(
+                            f"{client_name}: {message_encrypt}, algorithm: {algorithm_name} cipher"
+                        )
+                    else:
+                        await connection.send_text(f"{client_name}: {message_decrypt}")
                 else:
-                    await connection.send_text(f"You: {message}")
+                    await connection.send_text(f"You: {message_decrypt}")
