@@ -87,8 +87,9 @@ class ConnectionManager:
             for connection in self.active_connections:
                 if connection != websocket:
                     if flag < 20:
+                        print(f"{client_name}: {message_encrypt} [algorithm = '{algorithm_name} cipher']")
                         await connection.send_text(
-                            f"{client_name}: {message_encrypt}, algorithm: {algorithm_name} cipher"
+                            f"{client_name}: {message_encrypt} [algorithm = '{algorithm_name} cipher']"
                         )
                     else:
                         await connection.send_text(f"{client_name}: {message_decrypt}")
