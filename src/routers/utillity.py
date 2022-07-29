@@ -7,7 +7,6 @@ from .algorithms import *
 from fastapi import WebSocket
 
 
-
 # configure logging
 logging.basicConfig(
     level=logging.ERROR,
