@@ -8,6 +8,35 @@ body {
     box-sizing: border-box;
 }
 
+#user-list {
+    height: 75vh;
+    overflow-y: auto;
+    border-radius: 15px;
+}
+
+#message-list {
+    height: 75vh;
+    border-radius: 15px;
+}
+
+#messages-container {
+    overflow-y: auto;
+}
+
+#messages-container > div > span {
+    font-weight: bold;
+}
+
+#send-btn {
+    border-radius: 5px;
+}
+
+
+
+/********************/
+/* Previous Styles */
+/********************/
+
 #texta {
     margin-left: 30px;
     margin-top: 15px;
