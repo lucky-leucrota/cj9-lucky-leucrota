@@ -29,8 +29,10 @@ Activate virutal environment
 To run the project,
 
 ```bash
-uvicorn main:app --host '0.0.0.0' --port 8000
+uvicorn main:app --host '0.0.0.0' --port <any-port-number-you-want>
 ```
+
+Now visit `localhost:<the-port-you-have-chosen>`
 
 ### With Docker
 
@@ -44,8 +46,10 @@ $ docker build -t projectimage .
 After it's built use this to run it.
 
 ```bash
-$ docker run -d --name project_container_name -p 80:80 image_name
+$ docker run -d --name project_container_name -p 80:80 projectimage
 ```
+
+Now visit `localhost`
 
 ## Authors
 
