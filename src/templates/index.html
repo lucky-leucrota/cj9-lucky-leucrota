@@ -11,11 +11,9 @@
     <div class="row align-items-start">
         <div class="col-2">
             <div class="card text-dark bg-light mb-3 mt-5" id="user-list" style="max-width: 18rem;">
-                <div class="card-header"><kbd>All (03)</kbd></div>
-                <div class="card-body">
+                <div class="card-header"><kbd>All (<span id="count">1</span>)</kbd></div>
+                <div class="card-body" id="users">
                     <p class="card-text" id="ws-id"></p>
-                    <p class="card-text">John Doe</p>
-                    <p class="card-text">Sim Patrick</p>
                 </div>
             </div>
         </div>
@@ -23,11 +21,6 @@
             <div class="card text-dark bg-light mb-3 mt-5" id="message-list">
                 <div class="card-header"><kbd>Messages</kbd></div>
                 <div class="card-body" id="messages-container">
-                    <div class="chat-bubble">
-                        <span>Jane Doe</span>
-                        <p>This is a message sent by myself. BTW I'm Jane Doe. You can search the internet to learn more
-                            about me!</p>
-                    </div>
                 </div>
                 <div class="card-footer" id="send-message">
 

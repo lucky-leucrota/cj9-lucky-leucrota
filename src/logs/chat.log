@@ -1,0 +1,25 @@
+15:13:44 - INFO - Started server process [19156]
+15:13:44 - INFO - Waiting for application startup.
+15:13:44 - INFO - Application startup complete.
+15:13:46 - INFO - Started server process [20380]
+15:13:46 - INFO - Waiting for application startup.
+15:13:46 - INFO - Application startup complete.
+15:13:50 - INFO - Started server process [20712]
+15:13:50 - INFO - Waiting for application startup.
+15:13:50 - INFO - Application startup complete.
+21:35:45 - INFO - Started server process [24016]
+21:35:45 - INFO - Waiting for application startup.
+21:35:45 - INFO - Application startup complete.
+21:35:45 - INFO - Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+22:54:24 - INFO - Shutting down
+22:54:25 - INFO - Waiting for application shutdown.
+22:54:26 - INFO - Application shutdown complete.
+22:54:26 - INFO - Finished server process [24016]
+23:07:35 - INFO - Started server process [48876]
+23:07:35 - INFO - Waiting for application startup.
+23:07:35 - INFO - Application startup complete.
+23:07:35 - INFO - Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+23:11:43 - INFO - Shutting down
+23:11:43 - INFO - Waiting for application shutdown.
+23:11:43 - INFO - Application shutdown complete.
+23:11:43 - INFO - Finished server process [48876]
