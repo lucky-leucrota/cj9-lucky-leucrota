@@ -20,14 +20,14 @@ def test_basic():
 def test_multiple_connections():
     """Tests the basic functionality of multiple connections. (connect, send, receive, disconnect)"""
     ws1 = create_connection(BASE_URL + "/sas2k")
-    time.sleep(0.1)
+    time.sleep(0.2)
     ws2 = create_connection(BASE_URL + "/siamh")
 
     ws1.send(MESSAGE)
     result = ws2.recv()
 
     ws1.close()
-    time.sleep(0.1)
+    time.sleep(0.2)
     ws2.close()
     assert result[:5] == "sas2k"
 
@@ -38,6 +38,6 @@ def test_send_10_messages():
 
     for _ in range(10):
         ws.send(MESSAGE)
-        time.sleep(0.1)
+        time.sleep(0.2)
 
     ws.close()
