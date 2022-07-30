@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Request, WebSocket, WebSocketDisconnect
 from fastapi.templating import Jinja2Templates
 
-from .utillity import ConnectionManager
+from .utils import ConnectionManager
 
 router = APIRouter()
 
