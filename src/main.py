@@ -8,7 +8,7 @@ from .routers import chat
 # App Config
 app = FastAPI(
     title="Dis-Code",
-    version="Dev.4.2.0",
+    version="Dev.4.3.0",
     docs_url=None,
     redoc_url=None,
     openapi_url=None,
