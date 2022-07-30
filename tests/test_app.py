@@ -2,7 +2,7 @@ import time
 
 from websocket import create_connection
 
-BASE_URL = "ws://127.0.0.1:8000/ws"  # Change this to the address of the server
+BASE_URL = "wss://lucky-leucrota.herokuapp.com/ws"  # Change this to the address of the server
 MESSAGE = "Waaasssup my dudes!!"
 
 
