@@ -5,16 +5,7 @@ from typing import Callable, Dict, List
 
 from fastapi import WebSocket
 
-from .algorithms import (
-    caeser_decrypt,
-    caeser_encrypt,
-    monoalpabetic_decrypt,
-    monoalpabetic_encrypt,
-    tansposition_decrypt,
-    tansposition_encrypt,
-    vigenere_decrypt,
-    vigenere_encrypt,
-)
+from . import algorithms
 
 # configure logging
 logging.basicConfig(
@@ -28,26 +19,26 @@ logging.basicConfig(
 
 
 class ConnectionManager:
-    """Websocket Manager"""
+    """Handeling the websocket events. (connect, broadcast, disconnect)"""
 
     def __init__(self) -> None:
         self.active_connections: List[WebSocket] = []
         self.algorithm: Dict[str, Dict[str, Callable]] = {
             "monoalpabetic": {
-                "encrypt": monoalpabetic_encrypt,
-                "decrypt": monoalpabetic_decrypt,
+                "encrypt": algorithms.monoalpabetic_encrypt,
+                "decrypt": algorithms.monoalpabetic_decrypt,
             },
             "vigenere": {
-                "encrypt": vigenere_encrypt,
-                "decrypt": vigenere_decrypt,
+                "encrypt": algorithms.vigenere_encrypt,
+                "decrypt": algorithms.vigenere_decrypt,
             },
             "caeser": {
-                "encrypt": caeser_encrypt,
-                "decrypt": caeser_decrypt,
+                "encrypt": algorithms.caeser_encrypt,
+                "decrypt": algorithms.caeser_decrypt,
             },
             "tansposition": {
-                "encrypt": tansposition_encrypt,
-                "decrypt": tansposition_decrypt,
+                "encrypt": algorithms.tansposition_encrypt,
+                "decrypt": algorithms.tansposition_decrypt,
             },
         }
         self.all_algorithm_names: List[str] = list(self.algorithm.keys())
@@ -76,7 +67,7 @@ class ConnectionManager:
         if disconnected:
             for connection in self.active_connections:
                 if connection != websocket:
-                    await connection.send_text(f"{client_name} left the chat room.")
+                    await connection.send_text(f"{client_name} has left the chat room.")
 
         else:
             flag: int = random.randint(0, 100)
@@ -98,11 +89,8 @@ class ConnectionManager:
             for connection in self.active_connections:
                 if connection != websocket:
                     if flag < 20:
-                        print(
-                            f"{client_name}: {message_encrypt} [algorithm = '{algorithm_name} cipher']"
-                        )
                         await connection.send_text(
-                            f"{client_name}: {message_encrypt} [algorithm = '{algorithm_name} cipher']"
+                            f"{client_name}: {message_encrypt}, [algorithm = {algorithm_name} cipher]"
                         )
                     else:
                         await connection.send_text(f"{client_name}: {message_decrypt}")

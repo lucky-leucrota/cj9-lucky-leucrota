@@ -1,39 +1,52 @@
-<img src="https://github.com/lucky-leucrota/cj9-lucky-leucrota/blob/a05fbdd57ca5c576d1937ee868c1316f220f04e7/src/static/images/logo.png" alt="Dis-Code" width="256" height="256">
+<img src="src/static/images/logo-256.png" alt="Dis-Code" style="display: block; margin: 0 auto" />
 
 # Dis-Code
 
-A chat app made with FastAPI under 10 days, which has tendancy(20%) to forget to decrpyt the messages.
+A chat app made with FastAPI under 10 days, which has tendancy to forget to decrpyt the messages.
 
-## Running/developing
+## Running / Development 🤖
 
-> Also remember to rename the `chat.log.example` file to `chat.log`
+### With Virutal Environment
 
-## with Virutalenv
+Just fork or clone this repo and open the folder, then run the below to commands,
 
-Just fork and clone this and open the folder then run the below to build,
 ```bash
 #windows
+py -m venv venv
+```
+
+```bash
+#linux
+python3 -m venv venv
+```
+
+Activate virutal environment
+
+```bash
 .\venv\Scripts\activate
 ```
 
-To run the project run this,
+To run the project,
+
 ```bash
-uvicorn src.main:app --host '0.0.0.0' --port 8000
+uvicorn main:app --host '0.0.0.0' --port 8000
 ```
 
 ### With Docker
 
-just fork and clone this and open this folder.
+Just fork or clone this repo and open the folder,
 then run this to build,
+
 ```bash
 $ docker build -t projectimage .
 ```
 
 After it's built use this to run it.
+
 ```bash
-$ docker run -d --name projectcontainer -p 80:80 projectimage
+$ docker run -d --name project_container_name -p 80:80 image_name
 ```
 
 ## Authors
 
-[Lucky-Leucrota]("https://github.com/lucky-leucrota")
+[Lucky-Leucrota](https://github.com/lucky-leucrota)
