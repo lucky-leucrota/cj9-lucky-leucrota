@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from fastapi.templating import Jinja2Templates
-from fastapi.staticfiles import StaticFiles
 from fastapi.requests import Request
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
 from .routers import chat
 
@@ -16,6 +16,7 @@ app = FastAPI(
 app.mount("/static", StaticFiles(directory="src/static"), name="static")
 templates = Jinja2Templates(directory="src/templates")
 app.include_router(chat.router)
+
 
 # Exception Handlers and etc...
 @app.exception_handler(404)

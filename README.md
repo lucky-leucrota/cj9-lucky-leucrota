@@ -1,8 +1,12 @@
-# CodeJam 2022 Project Repository
+<img src="https://github.com/lucky-leucrota/cj9-lucky-leucrota/blob/a05fbdd57ca5c576d1937ee868c1316f220f04e7/src/static/images/logo.png" alt="Dis-Code" width="256" height="256">
 
-This is the app We're making.
+# Dis-Code
+
+A chat app made with FastAPI under 10 days, which has tendancy(20%) to forget to decrpyt the messages.
 
 ## Running/developing
+
+> Also remember to rename the `chat.log.example` file to `chat.log`
 
 ## with Virutalenv
 
@@ -29,3 +33,7 @@ After it's built use this to run it.
 ```bash
 $ docker run -d --name projectcontainer -p 80:80 projectimage
 ```
+
+## Authors
+
+[Lucky-Leucrota]("https://github.com/lucky-leucrota")

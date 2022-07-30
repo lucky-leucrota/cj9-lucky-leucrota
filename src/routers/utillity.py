@@ -2,10 +2,19 @@ import logging
 import os
 import random
 from typing import Callable, Dict, List
-from .algorithms import *
 
 from fastapi import WebSocket
 
+from .algorithms import (
+    caeser_decrypt,
+    caeser_encrypt,
+    monoalpabetic_decrypt,
+    monoalpabetic_encrypt,
+    tansposition_decrypt,
+    tansposition_encrypt,
+    vigenere_decrypt,
+    vigenere_encrypt,
+)
 
 # configure logging
 logging.basicConfig(
@@ -19,6 +28,8 @@ logging.basicConfig(
 
 
 class ConnectionManager:
+    """Websocket Manager"""
+
     def __init__(self) -> None:
         self.active_connections: List[WebSocket] = []
         self.algorithm: Dict[str, Dict[str, Callable]] = {
@@ -87,7 +98,9 @@ class ConnectionManager:
             for connection in self.active_connections:
                 if connection != websocket:
                     if flag < 20:
-                        print(f"{client_name}: {message_encrypt} [algorithm = '{algorithm_name} cipher']")
+                        print(
+                            f"{client_name}: {message_encrypt} [algorithm = '{algorithm_name} cipher']"
+                        )
                         await connection.send_text(
                             f"{client_name}: {message_encrypt} [algorithm = '{algorithm_name} cipher']"
                         )

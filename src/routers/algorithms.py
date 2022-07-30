@@ -4,6 +4,7 @@ import string
 
 # monoalpabetic cipher
 def monoalpabetic_encrypt(pt: str) -> str:
+    """Monoalphabetic cipher: Encryption"""
     PTA = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]|;':,./<>?`~"
     CTA = " qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789!@#$%^&*()_+-=[]|;':,./<>?`~"
 
@@ -12,12 +13,14 @@ def monoalpabetic_encrypt(pt: str) -> str:
     for i in pt:
         try:
             ans += CTA[PTA.index(i)]
-        except:
+        except Exception as e:
+            print(e)
             ans += i
     return ans
 
 
 def monoalpabetic_decrypt(ct: str) -> str:
+    """Monoalphabetic cipher: Decryption"""
     PTA = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]|;':,./<>?`~"
     CTA = " qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789!@#$%^&*()_+-=[]|;':,./<>?`~"
 
@@ -26,13 +29,15 @@ def monoalpabetic_decrypt(ct: str) -> str:
     for i in ct:
         try:
             ans += PTA[CTA.index(i)]
-        except:
+        except Exception as e:
+            print(e)
             ans += i
     return ans
 
 
 # vigenere cipher
 def vigenere_encrypt(pt: str, key: str = "luckyleucrota") -> str:
+    """Vigenere cipher: Encryption"""
     key = (key * (len(pt) // len(key))) + key[: len(pt) % len(key)]
 
     letters = (
@@ -61,6 +66,7 @@ def vigenere_encrypt(pt: str, key: str = "luckyleucrota") -> str:
 
 
 def vigenere_decrypt(ct: str, key: str = "luckyleucrota") -> str:
+    """Vingenere cipher: Decryption"""
     key = (key * (len(ct) // len(key))) + key[: len(ct) % len(key)]
 
     letters = (
@@ -90,6 +96,7 @@ def vigenere_decrypt(ct: str, key: str = "luckyleucrota") -> str:
 
 # caese cipher
 def caeser_encrypt(pt: str, key: int = 14) -> str:
+    """Ceaser cipher: Encryption"""
     letters = (
         string.ascii_lowercase
         + string.ascii_lowercase
@@ -109,6 +116,7 @@ def caeser_encrypt(pt: str, key: int = 14) -> str:
 
 
 def caeser_decrypt(ct: str, key: int = 14) -> str:
+    """Ceaser cipher: Decryption"""
     letters = (
         string.ascii_lowercase
         + string.ascii_lowercase
@@ -128,6 +136,7 @@ def caeser_decrypt(ct: str, key: int = 14) -> str:
 
 
 def tansposition_encrypt(pt: str, key: str = "luckyleucrota") -> str:
+    """Transposition cipher: Encryption"""
     pt_length = float(len(pt))
     pt_list = list(pt)
     key_list = list(key)
@@ -154,6 +163,7 @@ def tansposition_encrypt(pt: str, key: str = "luckyleucrota") -> str:
 
 
 def tansposition_decrypt(ct: str, key: str = "luckyleucrota") -> str:
+    """Transposition cipher: Decryption"""
     ct_length = float(len(ct))
     column_count = len(key)
     row_count = int(math.ceil(ct_length / column_count))
