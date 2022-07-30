@@ -1,0 +1,10 @@
+{
+    "version": 1,
+    "name": "Dis-Codde",
+    "builds": [
+      { "src": "src/main.py", "use": "@vercel/python" }
+    ],
+    "routes": [
+        {"src": "/(.*)", "dest": "src/main.py"}
+    ]
+}
