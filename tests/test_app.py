@@ -1,24 +1,43 @@
-import pytest
-from httpx import AsyncClient
+import time
 
-from src.app import app
+from websocket import create_connection
 
-baseUrl = "http://localhost:8000"  # Change the baseUrl after the production build.
-
-
-@pytest.mark.anyio
-async def test_root():
-    """The test function for root/index."""
-    async with AsyncClient(app=app, base_url=baseUrl) as ac:
-        response = await ac.get("/")
-    assert response.status_code == 200
-    assert response.json() == {"message": "Hello Bigger Applications!"}
+BASE_URL = "ws://127.0.0.1:8000/ws"  # Change this to the address of the server
+MESSAGE = "Waaasssup my dudes!!"
 
 
-@pytest.mark.anyio
-async def test_example():
-    """The test function for /example."""
-    async with AsyncClient(app=app, base_url=baseUrl) as ac:
-        response = await ac.get("/example/")
-    assert response.status_code == 200
-    assert response.json() == {"hello": "world"}
+def test_basic():
+    """Tests the basic functionality of one connection. (connect, send, receive, disconnect)"""
+    ws = create_connection(BASE_URL + "/harshal")
+
+    ws.send(MESSAGE)
+    result = ws.recv()
+
+    ws.close()
+    assert result[5:] == MESSAGE
+
+
+def test_multiple_connections():
+    """Tests the basic functionality of multiple connections. (connect, send, receive, disconnect)"""
+    ws1 = create_connection(BASE_URL + "/sas2k")
+    time.sleep(0.1)
+    ws2 = create_connection(BASE_URL + "/siamh")
+
+    ws1.send(MESSAGE)
+    result = ws2.recv()
+
+    ws1.close()
+    time.sleep(0.1)
+    ws2.close()
+    assert result[:5] == "sas2k"
+
+
+def test_send_10_messages():
+    """Sends 10 messages to the server and checks if the server received them."""
+    ws = create_connection(BASE_URL + "/sarvesh")
+
+    for _ in range(10):
+        ws.send(MESSAGE)
+        time.sleep(0.1)
+
+    ws.close()
