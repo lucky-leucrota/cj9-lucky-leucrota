@@ -62,6 +62,11 @@ $ docker run -d --name project_container_name -p 80:80 projectimage
 
 Now visit `localhost`
 
+### With Heroku
+
+Just fork or clone this repo and open the folder, and uncomment line `45` and comment out line `47` in the `src/static/js/script.js` file,
+And rename `dev-requirements.txt` to `requirements.txt`
+
 ## Authors
 
 [Lucky-Leucrota](https://github.com/lucky-leucrota)
