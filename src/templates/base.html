@@ -28,7 +28,7 @@
 </head>
 
 <body>
-    <!-- Navbar -->
+    <!-- Navbar Begin -->
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
         <div class="container-fluid">
             <a class="navbar-brand" href="."><img id="brand-logo" src={{ url_for("static", path="/images/logo.png" ) }}
@@ -72,15 +72,19 @@
             </div>
         </div>
     </nav>
-    <!-- Navbar -->
+    <!-- Navbar End -->
 
     {% block body %}{% endblock %}
 
-    <hr />
-    <footer>
-        <h4>Made By <a href="https://github.com/lucky-leucrota">Lucky Leucrota</a> <span id="year">2022</span>&copy;
-        </h4>
-    </footer>
+    <!-- Footer Begin -->
+    <div class="container" id="footer-area">
+        <footer class="py-3 my-4">
+          <p class="text-center border-bottom pb-3 mb-3 text-muted">Made with ❤️ by <a href="https://github.com/lucky-leucrota">Lucky Leucrota</a></p>
+          <p class="text-center text-muted">© <span id="year">2022</span> - MIT License</p>
+        </footer>
+      </div>
+    <!-- Footer End -->
+
     <!-- <script
           src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
           integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
