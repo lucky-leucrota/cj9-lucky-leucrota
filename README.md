@@ -35,7 +35,7 @@ pip install -r dev-requirements.txt
 To run the project,
 
 ```bash
-uvicorn main:app --host '0.0.0.0' --port <any-port-number-you-want>
+uvicorn src.main:app --host '0.0.0.0' --port <any-port-number-you-want>
 ```
 
 Now visit `localhost:<the-port-you-have-chosen>`
