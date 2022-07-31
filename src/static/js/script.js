@@ -42,24 +42,6 @@ var client_name = prompt("What is your name?");
 document.querySelector("#ws-id").textContent = client_name;
 var ws = new WebSocket(`wss://${window.location.host}/ws/${client_name}`);
 ws.onmessage = function (event) {
-<<<<<<< HEAD
-    // var messages = document.getElementById("messages");
-    // messages.value += event.data + '\n';
-    messagesContainer = document.getElementById("messages-container");
-    var chatBubble = document.createElement("div");
-    chatBubble.className = "chat-bubble";
-
-    var chatName = document.createElement("span");
-    chatName.textContent = event.data.split(":", 2)[0];
-    var chatMessage = document.createElement("p");
-    chatMessage.textContent = event.data.split(":", 2)[1];
-
-    messagesContainer.appendChild(chatBubble);
-    chatBubble.appendChild(chatName);
-    chatBubble.appendChild(chatMessage);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    // messagesContainer.innerHTML += event.data + '\n';
-=======
   // var messages = document.getElementById("messages");
   // messages.value += event.data + '\n';
   messagesContainer = document.getElementById("messages-container");
@@ -94,7 +76,6 @@ ws.onmessage = function (event) {
   document.getElementById("count").innerText =
     document.getElementById("users").childElementCount;
   // messagesContainer.innerHTML += event.data + '\n';
->>>>>>> 64c865b3f1832792fbb95f741fc7af4d070590db
 };
 
 codeInput.registerTemplate(
