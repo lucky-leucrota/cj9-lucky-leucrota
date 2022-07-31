@@ -24,7 +24,7 @@
                 </div>
                 <div class="card-footer" id="send-message">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" aria-label="Message to send" placeholder="Type message..." id="messageText" name="msg" rows="1" required>
+                        <input type="text" class="form-control" aria-label="Message to send" placeholder="Type message..." id="messageText" name="msg" rows="1" onkeypress="sendMessageByEnter(event, ws)" required>
                         <div class="input-group-append">
                         <button type="button" class="btn btn-outline-primary" id="send-btn" onclick="sendMessage(event, ws)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

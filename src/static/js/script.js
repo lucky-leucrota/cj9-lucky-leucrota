@@ -1,10 +1,14 @@
-//The Functions
 function sendMessage(event, ws) {
   var input = document.getElementById("messageText");
   ws.send(input.value);
   input.value = "";
+}
 
-  event.preventDefault();
+// Send message on enter
+function sendMessageByEnter(event, ws) {
+  if (event.key === 'Enter') {
+    sendMessage(event, ws);
+  }
 }
 
 async function main() {
