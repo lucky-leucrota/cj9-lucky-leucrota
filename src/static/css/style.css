@@ -1,6 +1,7 @@
-/*CSS Code */
+/* Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap");
 
+/* Page Body Common Styles */
 body {
   font-family: "Roboto Mono", monospace;
 }
@@ -8,6 +9,7 @@ body {
   box-sizing: border-box;
 }
 
+/* Component Styles */
 #user-list {
   height: 75vh;
   overflow-y: auto;
@@ -15,6 +17,11 @@ body {
 }
 
 #message-list {
+  height: 75vh;
+  border-radius: 15px;
+}
+
+.row #code-playground {
   height: 75vh;
   border-radius: 15px;
 }
