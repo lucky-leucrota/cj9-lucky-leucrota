@@ -26,6 +26,12 @@ Activate virutal environment
 .\venv\Scripts\activate
 ```
 
+Install dependencies
+
+```bash
+pip install -r dev-requirements.txt
+```
+
 To run the project,
 
 ```bash
