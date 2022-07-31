@@ -4,6 +4,11 @@
 
 A chat app made with FastAPI under 10 days, which has tendancy to forget to decrpyt the messages.
 
+### Features
+
+- A full UI, with member count and an editor to write python code
+- A full python code runner with the standard library
+
 ## Running / Development 🤖
 
 ### With Virutal Environment
