@@ -4,7 +4,7 @@ function sendMessage(event, ws) {
   ws.send(input.value);
   input.value = "";
 
-  event.preventDefault();
+
 }
 
 async function main() {
@@ -45,6 +45,15 @@ document.querySelector("#ws-id").textContent = client_name;
 // var ws = new WebSocket(`wss://${window.location.host}/ws/${client_name}`);
 // uncomment below line to tun on localhost
 var ws = new WebSocket(`ws://${window.location.host}/ws/${client_name}`);
+
+
+// Send message on enter
+function sendMessageByEnter(event, ws) {
+  if (event.key === 'Enter') {
+    sendMessage(event, ws);
+  }
+}
+
 
 ws.onmessage = function (event) {
   // var messages = document.getElementById("messages");

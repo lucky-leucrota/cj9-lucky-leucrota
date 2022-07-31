@@ -67,7 +67,7 @@ class ConnectionManager:
         if disconnected:
             for connection in self.active_connections:
                 if connection != websocket:
-                    await connection.send_text(f"{client_name} has left the chat room.")
+                    await connection.send_text(f"{client_name} left the chat room.")
 
         else:
             flag: int = random.randint(0, 100)
