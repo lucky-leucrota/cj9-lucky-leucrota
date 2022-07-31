@@ -34,8 +34,11 @@ body {
   font-weight: bold;
 }
 
-#send-btn {
-  border-radius: 5px;
+#footer-area {
+  border-top-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background-color: #fff;
+  box-shadow: #5f5f5f 0px 0px 5px;
 }
 
 /********************/
@@ -54,10 +57,7 @@ body {
   display: block;
 }
 
-#messageText {
-  background-color: #ffffff;
-  color: #000000;
-}
+
 
 .chat-popup {
   bottom: 200;
