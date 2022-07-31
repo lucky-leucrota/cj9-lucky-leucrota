@@ -7,17 +7,17 @@
 {% endblock %}
 {% block body %}
 
-<div class="container">
-    <div class="row align-items-start">
-        <div class="col-2">
-            <div class="card text-dark bg-light mb-3 mt-5" id="user-list" style="max-width: 18rem;">
+<div class="container-fluid">
+    <div class="row align-items-center">
+        <div class="col-sm-12 col-md-4 col-lg-2">
+            <div class="card text-dark bg-light mb-3 mt-5" id="user-list">
                 <div class="card-header"><kbd>All (<span id="count">1</span>)</kbd></div>
                 <div class="card-body" id="users">
                     <p class="card-text" id="ws-id"></p>
                 </div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-sm-12 col-md-8 col-lg-6">
             <div class="card text-dark bg-light mb-3 mt-5" id="message-list">
                 <div class="card-header"><kbd>Messages</kbd></div>
                 <div class="card-body" id="messages-container">
@@ -36,10 +36,10 @@
             </div>
         </div>
 
-        <div class="col-4">
-            <div class="card text-dark bg-light mb-3 mt-5" id="send-message">
-                <div class="card-header"><kbd>Send Messages</kbd></div>
-                <div class="card-body" id="messages-sender">
+        <div class="col-sm-12 col-lg-4">
+            <div class="card text-dark bg-light mb-3 mt-5" id="code-playground">
+                <div class="card-header"><kbd>Code Playground</kbd></div>
+                <div class="card-body" id="code-writer">
                     <div class="code">
                         <code-input lang="py" id="code-text" style="resize: both; overflow: hidden;"
                             placeholder="print('Code here. Output in the Dev-Console')"></code-input>

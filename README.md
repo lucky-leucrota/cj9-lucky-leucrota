@@ -4,6 +4,11 @@
 
 A chat app made with FastAPI under 10 days, which has tendancy to forget to decrpyt the messages.
 
+### Features
+
+- A full UI, with member count and an editor to write python code
+- A full python code runner with the standard library
+
 ## Running / Development 🤖
 
 ### With Virutal Environment
@@ -56,6 +61,11 @@ $ docker run -d --name project_container_name -p 80:80 projectimage
 ```
 
 Now visit `localhost`
+
+### With Heroku
+
+Just fork or clone this repo and open the folder, and uncomment line `45` and comment out line `47` in the `src/static/js/script.js` file,
+And rename `dev-requirements.txt` to `requirements.txt`
 
 ## Authors
 

@@ -2,10 +2,17 @@
 <html lang="en">
 
 <head>
-    <title>{% block title %}{% endblock %} - DisCode</title>
+    <title>{% block title %}{% endblock %} - Dis-Code</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
+    <link rel="icon" href={{ url_for("static", path="/images/logo.png" ) }} />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="theme-color" content="#e3f2fd" />
+    <meta
+      name="description"
+      content="A chat app made with FastAPI under 10 days, which has tendancy to forget to decrpyt the messages."
+    />
+    <link rel="apple-touch-icon" href={{ url_for("static", path="/images/logo-192.png" ) }} />
     <!-- The page supports only a dark color schemes -->
     <!-- <meta name="color-scheme" content="dark"> -->
     <script src="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@1.1/code-input.min.js"></script>
@@ -24,8 +31,8 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="."><img id="MDB-logo" src={{ url_for("static", path="/images/logo.png" ) }}
-                    alt="MDB Logo" draggable="false" height="30"
+            <a class="navbar-brand" href="."><img id="brand-logo" src={{ url_for("static", path="/images/logo.png" ) }}
+                    alt="Dis-Code Logo" draggable="false" height="30"
                     class="d-inline-block align-text-top me-2" />Dis-Code</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
                 aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +48,7 @@
                             </svg>Chat</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link mx-2" href="https://lucky-leucrota.github.io/Documentation"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        <a class="nav-link mx-2" href="https://lucky-leucrota.github.io"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-file-earmark-text-fill me-2 mb-1" viewBox="0 0 16 16">
                                 <path
                                     d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z" />

@@ -40,7 +40,12 @@ document.getElementById("year").innerText = new Date().getFullYear();
 
 var client_name = prompt("What is your name?");
 document.querySelector("#ws-id").textContent = client_name;
-var ws = new WebSocket(`wss://${window.location.host}/ws/${client_name}`);
+
+// uncomment below line to deploy to heroku
+// var ws = new WebSocket(`wss://${window.location.host}/ws/${client_name}`);
+// uncomment below line to tun on localhost
+var ws = new WebSocket(`ws://${window.location.host}/ws/${client_name}`);
+
 ws.onmessage = function (event) {
   // var messages = document.getElementById("messages");
   // messages.value += event.data + '\n';
