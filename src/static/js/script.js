@@ -45,9 +45,8 @@ document.getElementById("year").innerText = new Date().getFullYear();
 var client_name = prompt("What is your name?");
 document.querySelector("#ws-id").textContent = client_name;
 var ws = new WebSocket(`ws://${window.location.host}/ws/${client_name}`);
+
 ws.onmessage = function (event) {
-  // var messages = document.getElementById("messages");
-  // messages.value += event.data + '\n';
   messagesContainer = document.getElementById("messages-container");
   var chatBubble = document.createElement("div");
   chatBubble.className = "chat-bubble";
@@ -67,6 +66,7 @@ ws.onmessage = function (event) {
       return;
     }
   };
+
   join_leave_message_check(event);
   var chatName = document.createElement("span");
   chatName.textContent = event.data.split(":", 2)[0];
@@ -79,7 +79,6 @@ ws.onmessage = function (event) {
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
   document.getElementById("count").innerText =
     document.getElementById("users").childElementCount;
-  // messagesContainer.innerHTML += event.data + '\n';
 };
 
 codeInput.registerTemplate(
