@@ -7,3 +7,9 @@
 15:13:50 - INFO - Started server process [20712]
 15:13:50 - INFO - Waiting for application startup.
 15:13:50 - INFO - Application startup complete.
+22:54:32 - INFO - Started server process [7224]
+22:54:32 - INFO - Waiting for application startup.
+22:54:32 - INFO - Application startup complete.
+22:54:46 - INFO - ('127.0.0.1', 51385) - "WebSocket /ws/Sasen" [accepted]
+22:54:46 - INFO - connection open
+22:55:31 - INFO - connection closed
