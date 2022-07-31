@@ -1,18 +1,10 @@
 //The Functions
 function sendMessage(event, ws) {
-<<<<<<< HEAD
-    var input = document.getElementById("messageText");
-    ws.send(input.value);
-    input.value = "";
-
-    event.preventDefault();
-=======
   var input = document.getElementById("messageText");
   ws.send(input.value);
   input.value = "";
 
   event.preventDefault();
->>>>>>> 64c865b3f1832792fbb95f741fc7af4d070590db
 }
 
 async function main() {
