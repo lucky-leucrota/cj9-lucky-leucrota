@@ -69,7 +69,7 @@ And rename `dev-requirements.txt` to `requirements.txt`
 
 ### With Vercel
 
-rename `dev-requirements.txt` to `requirements.txt`
+Fork and clone this. Edit the `src/static/js/script.js` file and uncomment line `47` and comment out line `45` and rename `dev-requirements.txt` to `requirements.txt`
 
 then run this to deploy it to vercel,
 
