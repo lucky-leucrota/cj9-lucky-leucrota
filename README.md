@@ -4,6 +4,8 @@
 
 A chat app made with FastAPI under 10 days, which has tendancy to forget to decrpyt the messages.
 
+> Production is just to view the UI and the Code Runner. WebSockets don't work in Vercel.
+
 ### Features
 
 - A full UI, with member count and an editor to write python code
@@ -68,6 +70,9 @@ Just fork or clone this repo and open the folder, and uncomment line `45` and co
 And rename `dev-requirements.txt` to `requirements.txt`
 
 ### With Vercel
+
+> Vercel can't do WebSockets so you can't use this with Vercel.
+> but if your gonna do it anyway here are some instructions.
 
 Fork and clone this. Edit the `src/static/js/script.js` file and uncomment line `47` and comment out line `45` and rename `dev-requirements.txt` to `requirements.txt`
 
