@@ -67,6 +67,16 @@ Now visit `localhost`
 Just fork or clone this repo and open the folder, and uncomment line `45` and comment out line `47` in the `src/static/js/script.js` file,
 And rename `dev-requirements.txt` to `requirements.txt`
 
+### With Vercel
+
+rename `dev-requirements.txt` to `requirements.txt`
+
+then run this to deploy it to vercel,
+
+```bash
+$ vercel
+```
+
 ## Authors
 
 [Lucky-Leucrota](https://github.com/lucky-leucrota)

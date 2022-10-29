@@ -17,3 +17,8 @@ app.include_router(chat.router)
 async def Custom_404_handler(request: Request, _: Exception):
     """Custom 404 handler"""
     return templates.TemplateResponse("404.html", {"request": request}, status_code=404)
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

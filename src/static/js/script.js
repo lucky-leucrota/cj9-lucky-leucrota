@@ -43,7 +43,7 @@ document.querySelector("#ws-id").textContent = client_name;
 
 // uncomment below line to deploy to heroku
 // var ws = new WebSocket(`wss://${window.location.host}/ws/${client_name}`);
-// uncomment below line to tun on localhost
+// uncomment below line to tun on localhost or vercel
 var ws = new WebSocket(`ws://${window.location.host}/ws/${client_name}`);
 
 

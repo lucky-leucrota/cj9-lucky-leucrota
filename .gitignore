@@ -34,3 +34,4 @@ build/
 
 #custom
 old-src/
+.vercel
